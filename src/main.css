@@ -19,3 +19,7 @@
     border: none;
     margin: 0;
 }
+
+html {
+    height: 200rem;
+}

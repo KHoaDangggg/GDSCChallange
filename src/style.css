@@ -8,14 +8,27 @@ nav {
     z-index: 100;
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
+    transition: padding linear 300ms;
 }
-nav > svg {
+
+nav .navLogo {
+    transform: translateY(-1px);
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
     margin-right: 5rem;
+    display: inline-block;
+    height: 3.3rem;
 }
+.filter {
+    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(215deg)
+        brightness(105%) contrast(101%);
+}
+
 .navOptions {
     flex: 1;
+}
+.navOptions .row {
+    z-index: 2;
 }
 
 nav ul {
@@ -28,12 +41,9 @@ nav ul {
 
 nav li {
     height: 3.3rem;
-    padding: 0.5rem;
-    color: var(--Grayish-Violet);
-    font-size: 1.4rem;
-    text-align: center;
-    font-weight: 700;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 nav li:hover,
@@ -79,17 +89,40 @@ a {
     display: none;
 }
 
+.scrolling-active {
+    background: hsla(258, 27%, 26%, 0.95);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.scrolling-active a,
+.scrolling-active li:hover a,
+.scrolling-active .register a:hover {
+    color: var(--white);
+}
+
+.scrolling-active li:hover,
+.scrolling-active .register a:hover {
+    opacity: 0.7;
+}
+
+.scrolling-active .register button {
+    opacity: 0.9;
+}
+
+.scrolling-active .register button:hover {
+    opacity: 1;
+}
 /* Tablet resolution */
 @media (min-width: 680px) and (max-width: 1023px) {
     /* Navigation */
     nav ul {
-        column-gap: 2%;
+        column-gap: 1%;
     }
-    nav svg {
-        margin-right: 3rem;
+    nav .navLogo {
+        margin-right: 4%;
     }
     nav button {
-        margin-left: 0.5rem;
+        margin-left: 0.3rem;
     }
 }
 
@@ -100,22 +133,35 @@ a {
 
 /* Mobile resolution */
 @media (max-width: 679px) {
+    /* layer */
+    .layer {
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgb(110 110 110 / 15%);
+        transition: all linear 300ms;
+    }
     /* Navigation */
     nav {
         padding-bottom: 2rem;
     }
 
     nav .navOptions {
-        display: none;
+        max-height: 43rem;
         background: var(--Dark-Violet);
         text-align: center;
         width: 90%;
         border-radius: 1rem;
         padding: 2rem 1.5rem 1.5rem;
         position: absolute;
-        top: 100%;
+        top: 102%;
         left: 50%;
         transform: translateX(-50%);
+        animation: fadeDown 300ms 1 ease-out;
+        transition: max-height 300ms ease-out, opacity 300ms ease-out;
     }
 
     nav ul {
@@ -125,21 +171,25 @@ a {
         padding-bottom: 1rem;
         border-bottom: var(--Grayish-Violet) 1px solid;
         margin: 0 auto 1rem;
+        animation: popdown 200ms 1 ease-out;
     }
 
     nav li {
-        color: var(--white);
         height: auto;
         padding: 1.2rem 3rem;
     }
     nav li:hover {
         opacity: 0.8;
+    }
+
+    nav a {
         color: var(--white);
     }
 
     nav .register {
         height: auto;
         text-align: center;
+        animation: popdown 200ms 1 ease-out;
     }
 
     .navOptions a {
@@ -172,5 +222,58 @@ a {
 
     .menuBar {
         display: block;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .fadeUp {
+        max-height: 0;
+        opacity: 0.5;
+    }
+}
+
+/* Animation */
+@keyframes popdown {
+    0% {
+        opacity: 0;
+        transform: translate(0%, -10rem);
+    }
+
+    80% {
+        transform: translate(0%, -1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0%, 0);
+    }
+}
+@keyframes fadeDown {
+    0% {
+        opacity: 0.8;
+        max-height: 0;
+        transition: max-height 0.15s ease-out;
+    }
+
+    100% {
+        opacity: 1;
+        max-height: 500px;
+        transition: max-height 0.25s ease-in;
+    }
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 1;
+        max-height: 500px;
+        transition: max-height 0.25s ease-in;
+    }
+
+    100% {
+        opacity: 0.8;
+        max-height: 0;
+        transition: max-height 0.15s ease-out;
     }
 }
