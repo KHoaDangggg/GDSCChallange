@@ -7,7 +7,8 @@ const navSvg = nav.getElementsByTagName('svg');
 const layer = $('.layer');
 // Mobile Navigation
 menuBar.onchange = function () {
-    menu.classList.toggle('fadeUp');
+    menu.classList.toggle('hidden', false);
+    menu.classList.toggle('fadeUp', !menuBar.checked);
     layer.classList.toggle('hidden');
 };
 
