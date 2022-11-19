@@ -7,7 +7,7 @@ nav {
     position: fixed;
     z-index: 100;
     padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
+    padding-bottom: 2rem;
     transition: padding linear 300ms;
 }
 
@@ -62,17 +62,8 @@ nav a {
 
 nav button {
     font-size: 1.4rem;
-    color: var(--white);
-    font-weight: 700;
-    background-color: var(--Cyan);
-    cursor: pointer;
     padding: 0.5rem 2rem;
-    border-radius: 2rem;
     margin: auto 0 auto 2rem;
-}
-
-nav button:hover {
-    opacity: 0.6;
 }
 
 nav .register {
@@ -90,7 +81,7 @@ a {
 }
 
 .scrolling-active {
-    background: hsla(258, 27%, 26%, 0.95);
+    background: var(--scroll-nav);
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
@@ -105,16 +96,74 @@ a {
     opacity: 0.7;
 }
 
-.scrolling-active .register button {
-    opacity: 0.9;
+/* Main */
+main {
+    padding-top: 9%;
+}
+/* Desc */
+.desc {
+    background: url(../assets/img/illustration-working.svg) bottom 13em right -12rem
+        no-repeat;
+    background-size: 50%;
+    padding: 12rem 10% 20rem;
+    position: relative;
+}
+.desc > h1 {
+    color: var(--Very-Dark-Violet);
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 8rem;
+    width: 55rem;
 }
 
-.scrolling-active .register button:hover {
-    opacity: 1;
+.desc > p {
+    color: var(--Grayish-Violet);
+    font-size: 2rem;
+    width: 50rem;
 }
+
+.desc > button {
+    font-size: 1.6rem;
+    padding: 1.1rem 3.5rem;
+    margin-top: 3.5rem;
+}
+
+.linkbox {
+    background: url(../assets/img/bg-shorten-desktop.svg) no-repeat,
+        var(--Dark-Violet);
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    padding: 4% 5%;
+    border-radius: 0.8rem;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+}
+
+.linkbox input {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+}
+
+.linkbox > button {
+    font-size: 1.6rem;
+    padding: 0.8rem 3.7rem;
+    border-radius: 1rem;
+    min-width: 16rem;
+}
+
 /* Tablet resolution */
 @media (min-width: 680px) and (max-width: 1023px) {
     /* Navigation */
+    nav {
+        padding-top: 3rem;
+        padding-bottom: 1.1rem;
+    }
+
     nav ul {
         column-gap: 1%;
     }
@@ -123,6 +172,56 @@ a {
     }
     nav button {
         margin-left: 0.3rem;
+    }
+
+    .scrolling-active {
+        padding-top: 1.1rem;
+        padding-bottom: 1.1rem;
+    }
+
+    /* Desc  */
+    .desc {
+        background: url(../assets/img/illustration-working.svg) bottom 12rem
+            right -8rem no-repeat;
+        background-size: 54%;
+    }
+
+    .desc > h1 {
+        font-size: 6rem;
+        line-height: 7rem;
+        width: 50rem;
+    }
+
+    .desc > p {
+        font-size: 1.6rem;
+        width: 45rem;
+    }
+}
+
+/* Tablet low resolution */
+@media (min-width: 680px) and (max-width: 800px) {
+    /* Main */
+    main {
+        padding-top: 5%;
+    }
+
+    /* Desc  */
+    .desc {
+        background: url(../assets/img/illustration-working.svg) bottom 13em
+            right -11rem no-repeat;
+        background-size: 53%;
+        padding: 12rem 10% 14rem;
+    }
+
+    .desc > h1 {
+        font-size: 4.5rem;
+        line-height: 5.5rem;
+        width: 38rem;
+    }
+
+    .desc > p {
+        font-size: 1.5rem;
+        width: 38rem;
     }
 }
 
@@ -133,7 +232,7 @@ a {
 
 /* Mobile resolution */
 @media (max-width: 679px) {
-    /* layer */
+    /* Layer */
     .layer {
         z-index: 1;
         position: fixed;
@@ -146,7 +245,8 @@ a {
     }
     /* Navigation */
     nav {
-        padding-bottom: 2rem;
+        padding-top: 2.5rem;
+        padding-bottom: 1rem;
     }
 
     nav .navOptions {
@@ -208,10 +308,8 @@ a {
     }
 
     .navOptions button {
-        display: block;
         padding: 1rem;
         width: 90%;
-        border-radius: 3rem;
         margin: 2rem 0;
         font-size: 1.8rem;
     }
@@ -241,6 +339,39 @@ a {
         padding: 0;
         max-height: 0;
         opacity: 0;
+    }
+
+    .scrolling-active {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    /* Desc */
+    .desc {
+        width: 100%;
+        background: url(../assets/img/illustration-working.svg) right -45rem top
+            5rem no-repeat;
+        background-size: 100%;
+        padding: 20rem 10% 8rem;
+    }
+    .desc h1 {
+        font-size: 40px;
+    }
+    .desc p {
+        font-size: 20px;
+        margin-top: 1em;
+    }
+    .desc > button {
+        font-size: 24px;
+        margin-top: 0.8em;
+    }
+    .linkbox {
+        flex-direction: column;
+        gap: 1em;
+        padding: 2.5%;
+    }
+    .linkbox input {
+        width: 100%;
     }
 }
 
@@ -273,7 +404,6 @@ a {
         transition: max-height 0.25s ease-in;
     }
 }
-
 @keyframes fadeUp {
     0% {
         opacity: 1;
