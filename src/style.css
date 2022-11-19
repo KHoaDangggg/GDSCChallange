@@ -102,24 +102,25 @@ main {
 }
 /* Desc */
 .desc {
-    background: url(../assets/img/illustration-working.svg) bottom 13em right -12rem
+    background: url(../assets/img/illustration-working.svg) bottom 14em right -12rem
         no-repeat;
-    background-size: 50%;
+    background-size: 55%;
     padding: 12rem 10% 20rem;
     position: relative;
 }
 .desc > h1 {
     color: var(--Very-Dark-Violet);
-    font-size: 7rem;
+    font-size: 7.6rem;
     font-weight: 700;
-    line-height: 8rem;
-    width: 55rem;
+    line-height: 9rem;
+    width: 60rem;
 }
 
 .desc > p {
     color: var(--Grayish-Violet);
-    font-size: 2rem;
+    font-size: 2.3rem;
     width: 50rem;
+    padding-top: 1rem;
 }
 
 .desc > button {
@@ -131,12 +132,13 @@ main {
 .linkbox {
     background: url(../assets/img/bg-shorten-desktop.svg) no-repeat,
         var(--Dark-Violet);
-    background-size: cover;
+    background-size: 113%;
+    background-position: top -1rem right -7rem;
     display: flex;
     justify-content: space-between;
     width: 80%;
-    padding: 4% 5%;
-    border-radius: 0.8rem;
+    padding: 3% 4%;
+    border-radius: 1rem;
     position: absolute;
     bottom: 0;
     transform: translateY(50%);
@@ -144,9 +146,9 @@ main {
 
 .linkbox input {
     flex: 1;
-    padding: 1.5rem 2rem;
+    padding: 1.7rem 2rem;
     border-radius: 1rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
 }
 
 .linkbox > button {
@@ -245,8 +247,7 @@ main {
     }
     /* Navigation */
     nav {
-        padding-top: 2.5rem;
-        padding-bottom: 1rem;
+        padding: 4rem 4% 1rem;
     }
 
     nav .navOptions {
@@ -254,7 +255,7 @@ main {
         max-height: 50rem;
         background: var(--Dark-Violet);
         text-align: center;
-        width: 90%;
+        width: 88%;
         border-radius: 1rem;
         padding: 2rem 1.5rem 2rem;
         position: absolute;
@@ -329,6 +330,7 @@ main {
 
     .menuBar {
         display: block;
+        transform: scale(1.3) translateX(-7px);
     }
 
     .hidden {
@@ -348,30 +350,53 @@ main {
 
     /* Desc */
     .desc {
-        width: 100%;
-        background: url(../assets/img/illustration-working.svg) right -45rem top
-            5rem no-repeat;
-        background-size: 100%;
-        padding: 20rem 10% 8rem;
+        background: url(../assets/img/illustration-working.svg) right -15rem top
+            6rem no-repeat;
+        background-size: 131vw;
+        padding: 116vw 5% 8rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .desc h1 {
-        font-size: 40px;
+        font-size: 4rem;
+        text-align: center;
+        line-height: 4.5rem;
+        width: 100%;
+        font-weight: 700;
     }
     .desc p {
-        font-size: 20px;
-        margin-top: 1em;
+        font-size: 1.8rem;
+        margin-top: 0.5em;
+        width: 100%;
+        text-align: center;
     }
     .desc > button {
-        font-size: 24px;
-        margin-top: 0.8em;
+        font-size: 1.6rem;
+        margin: 2.5rem 0 4rem;
+        margin-bottom: 7rem;
     }
     .linkbox {
+        background: url(../assets/img/bg-shorten-mobile.svg) no-repeat,
+            var(--Dark-Violet);
+        background-size: 81%;
+        background-position: top -4rem right -1rem;
         flex-direction: column;
-        gap: 1em;
-        padding: 2.5%;
+        gap: 1.5em;
+        padding: 6%;
+        width: 90%;
     }
     .linkbox input {
-        width: 100%;
+        font-size: 1.2rem;
+        padding: 1.7rem;
+        border-radius: 0.5rem;
+        margin-right: 0;
+    }
+
+    .linkbox button {
+        font-size: 1.8rem;
+        border-radius: 0.5rem;
+        padding: 1.25rem;
     }
 }
 
