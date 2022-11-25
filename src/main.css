@@ -20,45 +20,7 @@
     padding: 0;
     border: none;
     margin: 0;
-}
-
-html {
-    height: 200rem;
-}
-
-/* PlaceHolder */
-::-webkit-input-placeholder {
-    /* WebKit, Blink, Edge */
-    font-size: 1.6rem;
-    color: var(--Grayish-Violet);
-}
-:-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
-    font-size: 1.6rem;
-    color: var(--Grayish-Violet);
-    opacity: 1;
-}
-::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    font-size: 1.6rem;
-    color: var(--Grayish-Violet);
-    opacity: 1;
-}
-:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    font-size: 1.6rem;
-    color: var(--Grayish-Violet);
-}
-::-ms-input-placeholder {
-    /* Microsoft Edge */
-    font-size: 1.6rem;
-    color: var(--Grayish-Violet);
-}
-
-::placeholder {
-    /* Most modern browsers support this now. */
-    font-size: 1.6rem;
-    color: var(--Grayish-Violet);
+    overflow-anchor: none !important;
 }
 
 button {
@@ -69,6 +31,6 @@ button {
     border-radius: 3rem;
 }
 
-button:hover {
-    background-color: hsl(180deg 63% 69%);
+.notInView {
+    opacity: 0;
 }
