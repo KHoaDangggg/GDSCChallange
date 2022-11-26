@@ -141,7 +141,6 @@ main {
     left: 0;
     color: var(--Red);
     font-size: 1.6rem;
-    display: none;
 }
 .linkbox input {
     width: 100%;
@@ -172,17 +171,18 @@ input::placeholder {
 .links {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1.5rem;
     width: 100%;
-    margin-top: 2em;
+    margin-top: 2rem;
     position: relative;
 }
 
 .links > div {
     background: var(--white);
     justify-content: space-between;
-    padding: 0.6em 1em;
-    border-radius: 0.6em;
+    padding: 2rem 3rem;
+    border-radius: 0.6rem;
+    width: 100%;
 }
 
 .links div {
@@ -192,19 +192,23 @@ input::placeholder {
 .links p {
     color: var(--Very-Dark-Violet);
     margin: auto 0;
+    font-size: 2rem;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .newLink p {
-    color: var(--Grayish-Violet);
+    color: var(--Cyan);
 }
 
 .newLink button {
+    font-size: 1.4rem;
     background: var(--Cyan);
     color: var(--white);
     cursor: pointer;
-    padding: 0.6em 1.6em;
-    border-radius: 0.6em;
-    margin-left: 1em;
+    padding: 1rem 3.5rem;
+    border-radius: 0.4em;
+    margin: auto 0 auto 2.5rem;
 }
 
 .newLink .copied {
@@ -489,16 +493,30 @@ footer img {
 
     /* Statistics*/
     .statistics {
-        padding: 6% 5% 0%;
+        padding: 6% 10% 0%;
+    }
+    .links > div {
+        padding: 0 2rem 1.5rem;
     }
     .links div {
         flex-direction: column;
-        gap: 0.4em;
+        gap: 0;
     }
-    .newLink {
-        border-top: var(--Dark-Violet) 1px solid;
-        padding-top: 0.4em;
+    .links > div p {
+        position: relative;
+        line-height: 3rem;
+        padding: 1rem 0;
     }
+    .links > div > p::after {
+        position: absolute;
+        content: '';
+        background-color: var(--Gray);
+        height: 1px;
+        width: calc(100% + 4rem);
+        top: 100%;
+        left: -2rem;
+    }
+
     .newLink button {
         margin: 0;
     }
@@ -576,10 +594,14 @@ footer img {
     }
 
     /* Desc  */
-    .desc {
-        background: url(../assets/img/illustration-working.svg) no-repeat;
+    .background {
         background-size: cover;
-        padding: 12rem 10% 14rem;
+        margin-left: 6%;
+        padding-top: 100%;
+        background-position: 0%;
+    }
+    .desc {
+        background: none;
     }
 
     .desc > h1 {
@@ -607,6 +629,8 @@ footer img {
         font-size: 1.7rem;
         padding: 0.8rem 4rem;
     }
+
+    /* Statistics */
 }
 
 /* Mobile resolution */
