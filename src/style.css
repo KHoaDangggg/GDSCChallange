@@ -404,6 +404,9 @@ footer img {
     .boostLink button:hover {
         background-color: hsl(180deg 63% 69%);
     }
+    .footer__links li:hover a {
+        color: var(--white);
+    }
     footer img:hover {
         opacity: 0.8;
     }
@@ -712,12 +715,14 @@ footer img {
 
     /* Desc */
     .background {
-        background-size: 150%;
+        background-size: cover;
         margin-left: 6%;
+        padding-top: 100%;
+        background-position: 0%;
     }
     .desc {
         background: none;
-        padding: 0 5% 8rem;
+        padding: 4.5rem 5% 8rem;
         display: flex;
         flex-direction: column;
         align-items: center;
