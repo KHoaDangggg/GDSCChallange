@@ -592,7 +592,9 @@ footer img {
     main {
         padding-top: 5%;
     }
-
+    nav {
+        padding: 1.5rem 5%;
+    }
     /* Desc  */
     .background {
         background-size: cover;
@@ -615,6 +617,9 @@ footer img {
         width: 38rem;
     }
 
+    .linkbox {
+        width: 90%;
+    }
     .linkbox .input > i {
         font-size: 1.3rem;
         top: calc(100% + 2px);
@@ -631,6 +636,12 @@ footer img {
     }
 
     /* Statistics */
+    .desc,
+    .statistics,
+    .footer {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
 }
 
 /* Mobile resolution */

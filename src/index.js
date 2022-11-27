@@ -9,8 +9,34 @@ const ShortenBtn = $('.linkbox button');
 const ShortenText = $('.linkbox input');
 const errorMessage = $('.linkbox i');
 const links = document.querySelector('.links');
-
+const linklist = [];
+const STORAGE_KEY = 'Links';
 const web = {
+    linklist,
+    config: JSON.parse(localStorage.getItem(STORAGE_KEY)) || {},
+    settingConfig: function (key, value) {
+        this.config[key] = value;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.config));
+    },
+    loadingConfig() {
+        this.linklist = this.config.linklist || [];
+    },
+    renderlink() {
+        let html = this.linklist
+            .map((link) => {
+                return `
+            <div>
+                <p>${link.original}</p>
+                <div class="newLink">
+                    <p>${link.short}</p>
+                    <button>Copy</button>
+                </div>
+            </div>     
+            `;
+            })
+            .join('');
+        links.innerHTML = html;
+    },
     eventHandler() {
         // Nav Scroll
         window.addEventListener('scroll', () => {
@@ -37,6 +63,12 @@ const web = {
         ShortenText.onfocus = function () {
             errorMessage.innerText = '';
             ShortenText.style.borderColor = '';
+            ShortenText.onkeydown = function (e) {
+                if (e.keyCode === 13) {
+                    web.getData(ShortenText.value);
+                    ShortenText.value = '';
+                }
+            };
         };
         // Mobile menu
         menuBar.onchange = function () {
@@ -68,42 +100,49 @@ const web = {
         checkPosition();
     },
     createHtmlElement(original, short) {
-        const div1 = document.createElement('div');
-        const p1 = document.createElement('p');
-        const div2 = document.createElement('div');
-        const p2 = document.createElement('p');
-        const copyBtn = document.createElement('button');
-        links.appendChild(div1);
-        p1.innerHTML = original;
-        div1.appendChild(p1);
-        div2.classList.add('newLink');
-        div1.appendChild(div2);
-        p2.innerHTML = short;
-        div2.appendChild(p2);
-        copyBtn.innerHTML = 'Copy';
+        const newLink = document.createElement('div');
+        newLink.innerHTML = `
+        <p>${original}</p>
+        <div class="newLink">
+        <p>${short}</p>
+        <button>Copy</button>
+        </div>`;
+        links.insertBefore(newLink, links.children[0]);
+        const copyBtn = newLink.querySelector('button');
         copyBtn.onclick = function () {
             navigator.clipboard.writeText(p2.innerHTML);
             copyBtn.innerHTML = 'Copied!';
             copyBtn.classList.add('copied');
         };
-        div2.appendChild(copyBtn);
     },
     getData(data) {
         fetch(`https://api.shrtco.de/v2/shorten?url=${data}`)
             .then((res) => res.json())
-            .then((data) => web.shortLink(data));
+            .then((data) => {
+                web.shortLink(data);
+            });
     },
     shortLink(data) {
         if (data.ok) {
-            const originalLink = data.result.original_link;
-            const shortLink = data.result.short_link;
-            web.createHtmlElement(originalLink, shortLink);
+            const original = data.result.original_link;
+            const short = data.result.short_link;
+            web.createHtmlElement(original, short);
+            web.updateList(original, short);
         } else {
-            errorMessage.innerText = 'Invalid link';
+            errorMessage.innerText = 'This is not a valid link';
             ShortenText.style.border = '2px solid var(--Red)';
         }
     },
+    updateList(original, short) {
+        web.linklist.unshift({
+            original,
+            short
+        });
+        web.settingConfig('linklist', web.linklist);
+    },
     start() {
+        this.loadingConfig();
+        this.renderlink();
         this.scrollIntoView();
         this.eventHandler();
     }
