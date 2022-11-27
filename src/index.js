@@ -110,7 +110,7 @@ const web = {
         links.insertBefore(newLink, links.children[0]);
         const copyBtn = newLink.querySelector('button');
         copyBtn.onclick = function () {
-            navigator.clipboard.writeText(p2.innerHTML);
+            navigator.clipboard.writeText(short);
             copyBtn.innerHTML = 'Copied!';
             copyBtn.classList.add('copied');
         };
