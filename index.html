@@ -26,7 +26,7 @@
     </head>
     <body>
         <!-- Layer -->
-        <div class="layer hidden"></div>
+        <label class="layer hidden" for="mobileMenu"></label>
 
         <!-- Navigation -->
         <div class="grid wide">
@@ -113,7 +113,18 @@
 
                 <!-- Statistics -->
                 <section class="statistics">
-                    <div class="links"></div>
+                    <div class="showLink">
+                        Show your shortened links
+                        <input type="checkbox" id="showLink" />
+                        <label
+                            for="showLink"
+                            class="fa-solid fa-angle-up"
+                        ></label>
+                    </div>
+
+                    <div class="links hiddenHistory">
+                        <p id="nolink">Shorten your link and see them here</p>
+                    </div>
 
                     <header class="statistics-header">
                         <h2 class="notInView">Advanced Statistics</h2>

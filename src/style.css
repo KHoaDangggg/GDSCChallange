@@ -168,15 +168,56 @@ input::placeholder {
 }
 
 /* Statistics */
+.showLink {
+    text-align: center;
+    padding: 2rem 1rem 0;
+    font-size: 1.8rem;
+    color: var(--Very-Dark-Violet);
+}
+.showLink input {
+    display: none;
+}
+.showLink label {
+    font-size: 3rem;
+    color: var(--Very-Dark-Violet);
+    padding: 1rem;
+    transform: translate(1rem, 0.3rem);
+    cursor: pointer;
+    transition: transform 400ms ease-out;
+}
+.showLink label.rotate {
+    transform: rotate(180deg) translate(-10px, -4px);
+}
 .links {
+    max-height: 200rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
     margin-top: 2rem;
     position: relative;
+    animation: fadeDown 300ms 1 ease-out;
+    transition: max-height 400ms ease-out, padding 300ms ease-out,
+        opacity 600ms ease-out;
 }
-
+.links #nolink {
+    display: block;
+    line-height: 0rem;
+    font-style: italic;
+    color: var(--Grayish-Violet);
+    display: block;
+    text-align: center;
+    transform: translateX(-25px);
+    font-size: 1.6rem;
+}
+.links.fadeUp {
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+}
+.hiddenHistory {
+    display: none;
+}
 .links > div {
     background: var(--white);
     justify-content: space-between;
@@ -819,8 +860,11 @@ footer img {
     }
 
     /* Statistics */
+    .showLink {
+        padding-top: 0;
+    }
     .statistics {
-        padding: 35% 5% 0%;
+        padding: 23% 5% 0%;
     }
 
     .statistics h2 {
@@ -902,7 +946,7 @@ footer img {
 
     100% {
         opacity: 1;
-        max-height: 500px;
+        max-height: auto;
         transition: max-height 0.25s ease-in;
     }
 }

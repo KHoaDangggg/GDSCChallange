@@ -9,10 +9,12 @@ const ShortenBtn = $('.linkbox button');
 const ShortenText = $('.linkbox input');
 const errorMessage = $('.linkbox i');
 const links = document.querySelector('.links');
+const historyBtn = $('#showLink');
 const linklist = [];
 const STORAGE_KEY = 'Links';
 const web = {
     linklist,
+    notEmpty: 'block',
     config: JSON.parse(localStorage.getItem(STORAGE_KEY)) || {},
     settingConfig: function (key, value) {
         this.config[key] = value;
@@ -20,8 +22,10 @@ const web = {
     },
     loadingConfig() {
         this.linklist = this.config.linklist || [];
+        this.notEmpty = this.config.notEmpty || 'block';
     },
     renderlink() {
+        links.querySelector('#nolink').style.display = this.notEmpty;
         let html = this.linklist
             .map((link) => {
                 return `
@@ -35,7 +39,7 @@ const web = {
             `;
             })
             .join('');
-        links.innerHTML = html;
+        links.innerHTML += html;
     },
     eventHandler() {
         // Nav Scroll
@@ -59,7 +63,12 @@ const web = {
                 ShortenText.value = '';
             }
         };
-
+        ShortenText.onkeypress = function (e) {
+            if (e.keyCode !== 13) {
+                errorMessage.innerText = '';
+                ShortenText.style.borderColor = '';
+            }
+        };
         ShortenText.onfocus = function () {
             errorMessage.innerText = '';
             ShortenText.style.borderColor = '';
@@ -75,6 +84,12 @@ const web = {
             menu.classList.toggle('hidden', false);
             menu.classList.toggle('fadeUp', !menuBar.checked);
             layer.classList.toggle('hidden');
+        };
+        // Show links history
+        historyBtn.onchange = function () {
+            $('.showLink label').classList.toggle('rotate');
+            links.classList.toggle('hiddenHistory', false);
+            links.classList.toggle('fadeUp', !historyBtn.checked);
         };
     },
     scrollIntoView() {
@@ -108,12 +123,22 @@ const web = {
         <button>Copy</button>
         </div>`;
         links.insertBefore(newLink, links.children[0]);
-        const copyBtn = newLink.querySelector('button');
-        copyBtn.onclick = function () {
-            navigator.clipboard.writeText(short);
-            copyBtn.innerHTML = 'Copied!';
-            copyBtn.classList.add('copied');
-        };
+        const copyBtn = document.querySelectorAll('.newLink button');
+        if (copyBtn) {
+            Array.from(copyBtn).forEach((btn) => {
+                btn.onclick = function () {
+                    navigator.clipboard.writeText(short);
+                    btn.innerHTML = 'Copied!';
+                    btn.classList.add('copied');
+                };
+            });
+        }
+        links.querySelector('#nolink').style.display = 'none';
+        web.settingConfig('notEmpty', 'none');
+        historyBtn.checked = true;
+        $('.showLink label').classList.toggle('rotate');
+        links.classList.toggle('hiddenHistory', false);
+        links.classList.toggle('fadeUp', !historyBtn.checked);
     },
     getData(data) {
         fetch(`https://api.shrtco.de/v2/shorten?url=${data}`)
