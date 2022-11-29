@@ -16,16 +16,23 @@ const web = {
     linklist,
     notEmpty: 'block',
     config: JSON.parse(localStorage.getItem(STORAGE_KEY)) || {},
-    settingConfig: function (key, value) {
+    settingConfig(key, value) {
         this.config[key] = value;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.config));
     },
     loadingConfig() {
         this.linklist = this.config.linklist || [];
         this.notEmpty = this.config.notEmpty || 'block';
+        // this.copyBtns = this.config.copyBtns || [];
+    },
+    update() {
+        const copyBtns = document.querySelectorAll('.newLink button');
+        links.querySelector('#nolink').style.display = this.notEmpty;
+        copyBtns.forEach((btn) => {
+            btn.onclick = this.copyClick(btn);
+        });
     },
     renderlink() {
-        links.querySelector('#nolink').style.display = this.notEmpty;
         let html = this.linklist
             .map((link) => {
                 return `
@@ -57,21 +64,18 @@ const web = {
                 errorMessage.innerText = 'Please add a link';
                 ShortenText.style.border = '2px solid var(--Red)';
             } else {
-                errorMessage.innerText = '';
-                ShortenText.style.borderColor = '';
+                web.showNormalInput();
                 web.getData(ShortenText.value);
                 ShortenText.value = '';
             }
         };
         ShortenText.onkeypress = function (e) {
             if (e.keyCode !== 13) {
-                errorMessage.innerText = '';
-                ShortenText.style.borderColor = '';
+                web.showNormalInput();
             }
         };
         ShortenText.onfocus = function () {
-            errorMessage.innerText = '';
-            ShortenText.style.borderColor = '';
+            web.showNormalInput();
             ShortenText.onkeydown = function (e) {
                 if (e.keyCode === 13) {
                     web.getData(ShortenText.value);
@@ -85,11 +89,29 @@ const web = {
             menu.classList.toggle('fadeUp', !menuBar.checked);
             layer.classList.toggle('hidden');
         };
-        // Show links history
-        historyBtn.onchange = function () {
-            $('.showLink label').classList.toggle('rotate');
-            links.classList.toggle('hiddenHistory', false);
-            links.classList.toggle('fadeUp', !historyBtn.checked);
+        // Toggle links history
+        historyBtn.onchange = web.toggleLinkHistory;
+    },
+
+    //Function
+    toggleLinkHistory() {
+        $('.showLink label').classList.toggle('rotate');
+        links.classList.toggle('hiddenHistory', false);
+        links.classList.toggle('fadeUp', !historyBtn.checked);
+    },
+    showNormalInput() {
+        errorMessage.innerText = '';
+        ShortenText.style.borderColor = '';
+    },
+    copyClick(btn) {
+        return () => {
+            document.querySelectorAll('.newLink button').forEach((element) => {
+                element.innerHTML = 'Copy';
+                element.classList.remove('copied');
+            });
+            //navigator.clipboard.writeText(short);
+            btn.innerHTML = 'Copied!';
+            btn.classList.add('copied');
         };
     },
     scrollIntoView() {
@@ -100,7 +122,7 @@ const web = {
             windowHeight = window.innerHeight;
         }
         function checkPosition() {
-            Array.from(elements).forEach((element) => {
+            elements.forEach((element) => {
                 let positionFromTop = element.getBoundingClientRect().top;
 
                 if (positionFromTop - windowHeight <= 0) {
@@ -123,22 +145,20 @@ const web = {
         <button>Copy</button>
         </div>`;
         links.insertBefore(newLink, links.children[0]);
-        const copyBtn = document.querySelectorAll('.newLink button');
-        if (copyBtn) {
-            Array.from(copyBtn).forEach((btn) => {
-                btn.onclick = function () {
-                    navigator.clipboard.writeText(short);
-                    btn.innerHTML = 'Copied!';
-                    btn.classList.add('copied');
-                };
-            });
-        }
+        const btn = newLink.querySelector(' button');
+        btn.onclick = this.copyClick(btn);
+        document.querySelectorAll('.newLink button').forEach((btn) => {
+            btn.innerHTML = 'Copy';
+            btn.classList.remove('copied');
+        });
         links.querySelector('#nolink').style.display = 'none';
+        web.settingConfig(
+            'copyBtns',
+            document.querySelectorAll('.newLink button')
+        );
         web.settingConfig('notEmpty', 'none');
         historyBtn.checked = true;
-        $('.showLink label').classList.toggle('rotate');
-        links.classList.toggle('hiddenHistory', false);
-        links.classList.toggle('fadeUp', !historyBtn.checked);
+        web.toggleLinkHistory();
     },
     getData(data) {
         fetch(`https://api.shrtco.de/v2/shorten?url=${data}`)
@@ -168,6 +188,7 @@ const web = {
     start() {
         this.loadingConfig();
         this.renderlink();
+        this.update();
         this.scrollIntoView();
         this.eventHandler();
     }
