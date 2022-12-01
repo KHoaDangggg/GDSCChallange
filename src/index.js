@@ -108,6 +108,7 @@ const web = {
                 element.innerHTML = 'Copy';
                 element.classList.remove('copied');
             });
+            let short = btn.closest('.newLink').querySelector('p').innerHTML;
             navigator.clipboard.writeText(short);
             btn.innerHTML = 'Copied!';
             btn.classList.add('copied');
