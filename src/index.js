@@ -23,7 +23,6 @@ const web = {
     loadingConfig() {
         this.linklist = this.config.linklist || [];
         this.notEmpty = this.config.notEmpty || 'block';
-        // this.copyBtns = this.config.copyBtns || [];
     },
     update() {
         const copyBtns = document.querySelectorAll('.newLink button');
@@ -109,7 +108,7 @@ const web = {
                 element.innerHTML = 'Copy';
                 element.classList.remove('copied');
             });
-            //navigator.clipboard.writeText(short);
+            navigator.clipboard.writeText(short);
             btn.innerHTML = 'Copied!';
             btn.classList.add('copied');
         };
