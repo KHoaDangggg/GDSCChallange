@@ -3,12 +3,14 @@ nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 1.5rem 10%;
+    padding: 1.5rem min(10%, 144px);
     position: fixed;
     z-index: 100;
     padding-top: 4.5rem;
     padding-bottom: 2rem;
     transition: padding linear 300ms;
+    max-width: 1440px;
+    margin: auto;
 }
 
 nav .navLogo {
@@ -384,10 +386,12 @@ input::placeholder {
 /* Footer */
 footer {
     background: var(--Very-Dark-Violet);
-    padding: 6rem 10% 7rem;
+    padding: 6rem min(10%, 144px) 7rem;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     text-align: left;
+    max-width: 1440px;
+    margin: auto;
 }
 
 footer > a {
